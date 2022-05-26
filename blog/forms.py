@@ -7,3 +7,9 @@ class BlogForm(ModelForm):
         model = Blog
         fields = '__all__'
         exclude = ['host', 'reaction_count']
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+        exclude = ['username', 'email']

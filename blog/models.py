@@ -12,10 +12,10 @@ class Blog(models.Model):
     host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     description = models.TextField() #null = false, blank = false
-    categories = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    categories = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
     reaction_count = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    upated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at', '-updated_at']

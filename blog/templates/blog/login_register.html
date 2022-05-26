@@ -6,16 +6,16 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 <label>Username</label>
-                <input type="username" name="username" , placeholder="Enter Username">
+                <input type="text" name="username" , placeholder="Enter Username">
 
-                <label>Username</label>
+                <label>Password</label>
                 <input type="password" name="password" , placeholder="Enter password">
                 <hr>
 
-                <input type="submit" name="login" value="login">
+                <input type="submit" name="submit" value="login">
             </form>
         </div>
-        <a href="{% url 'register' %}">Didn't sign up yet?</a>
+        <p>Didn't register yet?<a href="{% url 'register' %}"> Register</a></p>
     {% else %}
         <div>
             <form method="POST" action="">
@@ -24,6 +24,6 @@
                 <input type="submit" name="submit" , value="Register">
             </form>
         </div>
-        <a href="{% url 'login' %}">Already signed up?</a>
+        <P>Already Registered?<a href="{% url 'login' %}"> Login</a></P>
     {% endif %}
 {% endblock %}

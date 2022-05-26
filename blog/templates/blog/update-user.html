@@ -1,0 +1,14 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+    <h2>Edit your profile</h2>
+    {% for i in form %}
+        <form method="POST" action="">
+        {% csrf_token %}
+            <label>{{ i.name }}</label>
+            {{ i }}
+        </form>
+    {% endfor %}
+    <input type="submit" name="Update" value="updateUser">
+    <a href="{% url 'profile' user.id %}">Cancel</a>
+{% endblock %}

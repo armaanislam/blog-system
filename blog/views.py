@@ -56,7 +56,7 @@ def registerPage(request):
             #form.save()
             login(request, user)
             return redirect('feed')
-        messages.success(request, 'Account has been created!')
+            messages.success(request, 'Account has been created!')
     else:
         messages.error(request, 'Login failed.')
     context = {'form': form}
@@ -68,5 +68,39 @@ def feedPage(request):
     context = {}
     return render(request, 'blog/feed.html', context)
 
-@login_required(login_url='')
-def updateUser()
+@login_required(login_url='login')
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+
+    context = {'user': user}
+    return render(request, 'blog/profile.html', context)
+
+
+@login_required(login_url='login')
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', pk=user.id)
+
+    context = {'form': form}
+    return render(request, 'blog/update-user.html', context)
+
+
+#@login_required(login_url='login')
+# def deleteUser(request):
+#     user = request.user
+#     form = UserForm(instance=user)
+#
+#     if request.method == "POST":
+#         form = UserForm(request.POST, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')
+#
+#     context = {'form': form}
+#     return render(request, 'blog/update-user.html', context)

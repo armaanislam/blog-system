@@ -10,7 +10,6 @@ from .models import *
 from .forms import *
 
 
-
 def loginUser(request):
     check = 'login'
 
@@ -52,7 +51,7 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username#.lower()
+            #user.username = user.username#.lower()
             user.save()
             messages.success(request, 'Account has been created!')
             login(request, user)
@@ -61,6 +60,7 @@ def registerPage(request):
         messages.error(request, 'Login failed.')
     context = {'form': form}
     return render(request, 'blog/login_register.html', context)
+
 
 
 @login_required(login_url='login')
@@ -79,6 +79,7 @@ def homePage(request):
     return render(request, 'blog/home.html', context)
 
 
+
 @login_required(login_url='login')
 def createBlog(request):
     form = BlogForm()
@@ -86,7 +87,8 @@ def createBlog(request):
 
     if request.method == 'POST':
         categories_name = request.POST.get('categories')
-        categories, created_at = Categories.objects.get_or_create(name=categories_name)
+        categories = Categories.objects.get(name=categories_name)
+        #categories, created_at = Categories.objects.get_or_create(name=categories_name)
 
         Blog.objects.create(
             author = request.user,
@@ -99,6 +101,7 @@ def createBlog(request):
     return render(request, 'blog/blog_form.html', context)
 
 
+
 @login_required(login_url='login')
 def updateBlog(request, pk):
     blog = Blog.objects.get(id=pk)
@@ -107,7 +110,8 @@ def updateBlog(request, pk):
 
     if request.method == 'POST':
         categories_name = request.POST.get('categories')
-        categories, created_at = Categories.objects.get_or_create(name=categories_name)
+        categories = Categories.objects.get(name=categories_name)
+        #categories, created_at = Categories.objects.get_or_create(name=categories_name)
         blog.author=request.user
         blog.categories=categories
         blog.title=request.POST.get('title')
@@ -117,6 +121,7 @@ def updateBlog(request, pk):
 
     context = {'blog':blog, 'form':form, 'categories':categories}
     return render(request, 'blog/blog_form.html', context)
+
 
 
 @login_required(login_url='login')
@@ -170,6 +175,8 @@ def deleteUser(request, pk):
     context = {'object': user}
     return render(request, 'blog/delete-user.html', context)
 
+
+@login_required(login_url='login')
 def likeCounter(request, pk):
     blog = Blog.objects.get(id=pk)
     if blog.likes.filter(id=request.user.id).exists():

@@ -2,16 +2,27 @@
 
 {% block content %}
 
-    <h1>Hello, <a href="{% url 'profile' user.id %}">{{ user.username }}</a>!</h1>
-    <a href="{% url 'create-blog' %}">Create Blog</a>
-    <a href="{% url 'logout' %}">Logout</a>
-    <hr>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+
+    <div style="text-align: center">
+        <h1>Welcome Back, <a href="{% url 'profile' user.id %}">{{ user.username }}</a>!</h1>
+    </div>
+    <div style="text-align: center">
+        <a href="{% url 'create-blog' %}">Create Blog</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <hr>
+    </div>
+    <br>
     <div>
         {% include 'blog/categories_component.html' %}
     </div>
     <hr>
-    <div>
-        <h2>Blog Feed</h2>
+    <div class="center">
+        <h2 class="center">Blog Feed</h2>
         <form method="GET" action="">
             <input name="q" placeholder="Search Blogs">
             <br>
@@ -19,7 +30,7 @@
             <button type="submit">Search</button>
         </form>
         <br>
-        {% include 'blog/feed_component.html' %}
     </div>
+    {% include 'blog/feed_component.html' %}
 
 {% endblock %}

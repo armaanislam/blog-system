@@ -2,13 +2,14 @@
 
 {% block content %}
     <h2>Edit your profile</h2>
-    {% for i in form %}
-        <form method="POST" action="">
+    <form method="POST" action="">
         {% csrf_token %}
-            <label>{{ i.name }}</label>
+        {% for i in form %}
+            <label>{{ i.name }}: </label>
             {{ i }}
-        </form>
-    {% endfor %}
-    <input type="submit" name="Update" value="updateUser">
-    <a href="{% url 'profile' user.id %}">Cancel</a>
+            <br>
+        {% endfor %}
+        <input type="submit" name="Update" value="Update">
+        <a href="{% url 'profile' user.id %}">Cancel</a>
+    </form>
 {% endblock %}

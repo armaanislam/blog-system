@@ -1,9 +1,0 @@
-{% extends 'blog/main.html' %}
-
-{% block content %}
-
-    <h1>Hello <a href="{% url 'profile' user.id %}">{{ user.username }}</a></h1>
-
-    <a href="{% url 'logout' %}">Logout</a>
-
-{% endblock %}

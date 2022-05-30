@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
-    'bootstrap5',
 ]
 
 AUTH_USER_MODEL = 'blog.User'

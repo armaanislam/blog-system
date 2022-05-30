@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Edit your profile</h2>
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data"> {# Enctype tells that we are also submitting files with the form #}
         {% csrf_token %}
         {% for i in form %}
             <label>{{ i.name }}: </label>
